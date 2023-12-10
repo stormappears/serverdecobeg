@@ -37,19 +37,18 @@ io.on("connection", (socket) => {
   // Handle peer id
   socket.on("peerid", (data) => {
     socket.to(data.room).emit("peer_reciver", data);
-  });  
-  
-  
+  });
+
   // Handle offfer
   socket.on("offer_emmiter", (data) => {
     socket.to(data.room).emit("offer_listener", data);
-  });  
-  
+  });
+
   // Handle answer
   socket.on("answer_emmiter", (data) => {
     socket.to(data.room).emit("answer_listener", data);
-  });  
-  
+  });
+
   // Handle ice candidate
   socket.on("ice_emmiter", (data) => {
     socket.to(data.room).emit("ice_listener", data);
@@ -79,7 +78,8 @@ function addToChatQueue(user) {
     // Match user1 and user2
     console.log(`Matching ${user1} with ${user2}`);
     // HandleUserRoom(user1 , user2);
-    io.to(user1).emit("sendUserRoom", uiid);
-    io.to(user2).emit("sendUserRoom", uiid);
+    let isOwner = true
+    io.to(user1).emit("sendUserRoom", { uiid, isOwner });
+    io.to(user2).emit("sendUserRoom", { uiid });
   }
 }

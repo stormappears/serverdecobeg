@@ -32,6 +32,7 @@ io.on("connection", (socket) => {
   // Handle send message event
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
+    console.log(data.message)
   });
 
   // Handle peer id
@@ -42,6 +43,8 @@ io.on("connection", (socket) => {
   // Handle offfer
   socket.on("offer_emmiter", (data) => {
     socket.to(data.room).emit("offer_listener", data);
+    console.log("offer emmitor got fired")
+    console.log(data);
   });
 
   // Handle answer

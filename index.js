@@ -26,13 +26,14 @@ io.on("connection", (socket) => {
 
   // Handle join room event
   socket.on("join_room", (data) => {
+    console.log(data);
     socket.join(data);
   });
 
   // Handle send message event
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
-    console.log(data.message)
+    console.log(data.message);
   });
 
   // Handle peer id
@@ -43,7 +44,7 @@ io.on("connection", (socket) => {
   // Handle offfer
   socket.on("offer_emmiter", (data) => {
     socket.to(data.room).emit("offer_listener", data);
-    console.log("offer emmitor got fired")
+    console.log("offer emmitor got fired");
     console.log(data);
   });
 
@@ -81,8 +82,8 @@ function addToChatQueue(user) {
     // Match user1 and user2
     console.log(`Matching ${user1} with ${user2}`);
     // HandleUserRoom(user1 , user2);
-    let isOwner = true
-    io.to(user1).emit("sendUserRoom", { uiid, isOwner });
-    io.to(user2).emit("sendUserRoom", { uiid });
+    let isOwner = true;
+    io.to(user1).emit("sendUserRoom",  uiid);
+    io.to(user2).emit("sendUserRoom",  uiid );
   }
 }
